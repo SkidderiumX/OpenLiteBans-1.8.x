@@ -9,7 +9,7 @@ import org.yaml.snakeyaml.representer.Representer;
 
 public final class YamlConfigRepresenter extends Representer {
    public YamlConfigRepresenter(DumperOptions var1) {
-      super(var1);
+      super();
       Map var2 = this.representers;
       Class<ConfigNode> var3 = ConfigNode.class;
       Represent var4 = a -> getNode(this, (Object) a);

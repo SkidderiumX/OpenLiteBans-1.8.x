@@ -1,8 +1,6 @@
 package litebans.platform;
 
-import litebans.chat.BungeeComponentParser;
 import litebans.chat.BungeeLegacyComponentParser;
-import net.md_5.bungee.chat.ChatVersion;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Player.Spigot;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
@@ -27,15 +25,7 @@ public class PlatformDetector {
 
    public static void handlePlayer(Player var0, String var1) {
       Spigot var2 = var0.spigot();
-      if (BungeeLegacyComponentParser.isFlag()) {
-         if (flag) {
-            var2.sendMessage(BungeeComponentParser.getBaseComponentArray(var1, ChatVersion.V1_21_5));
-         } else {
-            var2.sendMessage(BungeeComponentParser.getBaseComponentArray(var1, ChatVersion.V1_16));
-         }
-      } else {
-         var2.sendMessage(BungeeLegacyComponentParser.getBaseComponentArray2(var1));
-      }
+      var2.sendMessage(BungeeLegacyComponentParser.getBaseComponentArray2(var1));
    }
 
    static {

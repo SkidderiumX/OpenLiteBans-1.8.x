@@ -44,7 +44,6 @@ import litebans.platform.PlatformDetector;
 import litebans.platform.Sender;
 import litebans.platform.bukkit.BukkitBridge;
 import litebans.platform.bukkit.ProtocolLibChat;
-import litebans.platform.bungee.BungeeBridge;
 import litebans.punishment.MuteManager;
 import litebans.punishment.PlayerHistory;
 import litebans.punishment.PunishmentEntry;
@@ -217,9 +216,7 @@ public class LiteBansCommand extends BaseCommand {
                            ProtocolLibChat.INSTANCE.handleObject(var44.getHandle(), var38);
                            break;
                         case 1:
-                           BungeeBridge var48 = (BungeeBridge)var3.createBridge();
-                           var48.handleSender(var44, var38);
-                           break;
+                           throw new UnsupportedOperationException();
                         default:
                            throw new UnsupportedOperationException();
                      }

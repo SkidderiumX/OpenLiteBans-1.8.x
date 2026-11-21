@@ -42,7 +42,7 @@ public class VersionedComponentSerializer implements JsonDeserializer {
    }
 
    public BaseComponent[] getBaseComponentArray(String var1) {
-      JsonElement var2 = JsonParser.parseString(var1);
+      JsonElement var2 = new JsonParser().parse(var1);
       return var2.isJsonArray()
          ? (BaseComponent[])this.gson.fromJson(var2, BaseComponent[].class)
          : new BaseComponent[]{(BaseComponent)this.gson.fromJson(var2, BaseComponent.class)};

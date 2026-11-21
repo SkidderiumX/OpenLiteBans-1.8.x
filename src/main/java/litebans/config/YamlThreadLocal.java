@@ -1,7 +1,6 @@
 package litebans.config;
 
 import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.DumperOptions.FlowStyle;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -17,7 +16,7 @@ public class YamlThreadLocal extends ThreadLocal {
       DumperOptions var1 = new DumperOptions();
       var1.setDefaultFlowStyle(FlowStyle.BLOCK);
       YamlRepresenter var2 = new YamlRepresenter(this, var1);
-      return new Yaml(new Constructor(new LoaderOptions()), var2, var1);
+      return new Yaml(new Constructor(), var2, var1);
    }
 
    @Override

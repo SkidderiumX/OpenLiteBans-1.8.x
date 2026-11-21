@@ -14,7 +14,6 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.connection.Server;
-import net.md_5.bungee.chat.ChatVersion;
 import org.jetbrains.annotations.Nullable;
 
 @MetadataAnnotation(
@@ -183,15 +182,7 @@ public class BungeeSender implements Sender {
    public void sendJsonMessage(String var1) {
       CommandSender var2 = (CommandSender)this.weakReference.get();
       if (var2 != null) {
-         if (BungeeLegacyComponentParser.isFlag()) {
-            if (this.getInt() >= 770) {
-               var2.sendMessage(BungeeComponentParser.getBaseComponentArray(var1, ChatVersion.V1_21_5));
-            } else {
-               var2.sendMessage(BungeeComponentParser.getBaseComponentArray(var1, ChatVersion.V1_16));
-            }
-         } else {
-            var2.sendMessage(BungeeLegacyComponentParser.getBaseComponentArray2(var1));
-         }
+         var2.sendMessage(BungeeComponentParser.getBaseComponentArray(var1));
       }
    }
 

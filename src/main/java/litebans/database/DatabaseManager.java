@@ -84,7 +84,6 @@ import litebans.lib.kotlin.text.StringsKt;
 import litebans.platform.LiteBansPlatform;
 import litebans.platform.PlatformBridge;
 import litebans.platform.Sender;
-import litebans.platform.bungee.BungeeBridge;
 import litebans.punishment.Flag;
 import litebans.punishment.PlayerInfo;
 import litebans.punishment.PunishmentCheckTask;
@@ -1748,16 +1747,6 @@ public final class DatabaseManager extends PluginModule {
                }
 
                var20.handleDataSource(new DriverManagerDataSource((Driver)var8, var20));
-               if (this.platform.getPlatformId() == 1) {
-                  try {
-                     PlatformBridge var10001 = this.platform.createBridge();
-                     Intrinsics.handleObject(var10001, "");
-                     var20.handleThreadFactory(((BungeeBridge)var10001).getThreadFactory(this.platform));
-                  } catch (Throwable var42) {
-                     this.reportError(var42);
-                  }
-               }
-
                this.hikariDataSource = new HikariDataSource(var20);
             } catch (Exception var44) {
                PluginModule var58 = this;

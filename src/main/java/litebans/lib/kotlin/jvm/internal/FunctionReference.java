@@ -1,7 +1,5 @@
 package litebans.lib.kotlin.jvm.internal;
 
-import kotlin.jvm.internal.Reflection;
-
 public class FunctionReference extends CallableReference implements FunctionBase, KFunction {
    private final int intValue;
    private final int intValue2;

@@ -24,22 +24,22 @@
 ## About
 
 **Databases:** H2 · MySQL · MariaDB · PostgreSQL
-**Platform:** Paper / Spigot 1.21.x (Bukkit)
-**Java:** 21
+**Platform:** Spigot 1.8.9 (Bukkit)
+**Java:** 8
 
 ---
 
 ## How to build
 
 ### Prerequisites
-- **JDK 21**
+- **JDK 17+** (the build emits Java 8 bytecode for Spigot 1.8.9)
 
 ### Build
 
 Run from this folder:
 
 ```powershell
-$env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
+$env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot"
 
 .\gradlew.bat clean build
 ```

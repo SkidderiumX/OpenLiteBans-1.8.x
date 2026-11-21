@@ -1,7 +1,6 @@
 package litebans.lib.kotlin.jvm.internal;
 
 import java.io.Serializable;
-import kotlin.jvm.internal.Reflection;
 
 public abstract class CallableReference implements KCallable, Serializable {
    private transient KCallable kCallable;
@@ -45,9 +44,7 @@ public abstract class CallableReference implements KCallable, Serializable {
    }
 
    public KDeclarationContainer getKDeclarationContainer() {
-      return (KDeclarationContainer)(this.classValue == null
-         ? null
-         : (this.flag ? Reflection.getOrCreateKotlinPackage(this.classValue) : Reflection.getOrCreateKotlinClass(this.classValue)));
+      return null;
    }
 
    @Override

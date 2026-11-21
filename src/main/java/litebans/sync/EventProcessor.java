@@ -1,5 +1,7 @@
 package litebans.sync;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,13 +16,9 @@ import litebans.lib.kotlin.ranges.IntRange;
 import litebans.platform.LiteBansPlatform;
 import litebans.platform.Sender;
 import litebans.platform.SimpleSender;
-import litebans.platform.bungee.DummyProxiedPlayer;
-import litebans.platform.bungee.DummyServerInfo;
 import litebans.randomid.LongBitSet;
 import litebans.util.DecimalFormats;
-import net.md_5.bungee.api.config.ServerInfo;
-import net.md_5.bungee.api.event.ServerConnectEvent;
-import net.md_5.bungee.api.event.ServerConnectEvent.Reason;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.jetbrains.annotations.NotNull;
 
 public final class EventProcessor extends CommandRunnable {
@@ -38,7 +36,6 @@ public final class EventProcessor extends CommandRunnable {
       int var3 = ArgParser.getInt(this.stringArray, 1, 512);
       int var4 = ArgParser.getInt(this.stringArray, 2, 4096);
       int var5 = ArgParser.getInt(this.stringArray, 3, 6);
-      ServerInfo var6 = new DummyServerInfo();
       List var7 = new ArrayList(var3);
 
       for (int var8 = 0; var8 < var3; var8++) {
@@ -59,11 +56,11 @@ public final class EventProcessor extends CommandRunnable {
 
       while (var18.hasNext()) {
          int var19 = ((IntIterator)var18).getInt();
-         this.getPlatform().execute(() -> handleSender(var1, var19, var7, var2, this, var6));
+         this.getPlatform().execute(() -> handleSender(var1, var19, var7, var2, this));
       }
    }
 
-   private static final void handleSender(Sender var0, int var1, List var2, LongBitSet var3, EventProcessor var4, ServerInfo var5) {
+   private static final void handleSender(Sender var0, int var1, List var2, LongBitSet var3, EventProcessor var4) {
       long var9 = System.nanoTime();
       Iterable var12 = new IntRange(1, var1);
       Iterator var14 = var12.iterator();
@@ -72,9 +69,14 @@ public final class EventProcessor extends CommandRunnable {
          ((IntIterator)var14).getInt();
          Sender var18 = (Sender)var2.get(var3.getInt(var2.size()));
          CommandRunnable var19 = var4;
-         ((NotificationManager)var19.getPlatform().getModule(NotificationManager.class))
-            .getLoginCheck()
-            .handleObject(new ServerConnectEvent(new DummyProxiedPlayer(var18, var5), var5, Reason.PLUGIN, null));
+
+         try {
+            ((NotificationManager)var19.getPlatform().getModule(NotificationManager.class))
+               .getLoginCheck()
+               .handleObject(new AsyncPlayerPreLoginEvent(var18.getName(), InetAddress.getByName(var18.getIp()), var18.getUuid()));
+         } catch (UnknownHostException var20) {
+            throw new RuntimeException(var20);
+         }
       }
 
       long var6 = System.nanoTime() - var9;

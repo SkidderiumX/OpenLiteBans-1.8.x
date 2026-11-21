@@ -7,7 +7,7 @@ public class YamlRepresenter extends Representer {
    public final YamlThreadLocal yamlThreadLocal;
 
    public YamlRepresenter(YamlThreadLocal var1, DumperOptions var2) {
-      super(var2);
+      super();
       this.yamlThreadLocal = var1;
       this.representers.put(ConfigNode.class, new YamlRepresent(this));
    }

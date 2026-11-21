@@ -25,7 +25,12 @@ public final class ProtocolLibChat {
       var3.getChatComponents().write(0, WrappedChatComponent.fromJson(var2));
       ProtocolManager var10000 = ProtocolLibrary.getProtocolManager();
       Intrinsics.handleObject(var1, "");
-      var10000.sendServerPacket((Player)var1, var3);
+
+      try {
+         var10000.sendServerPacket((Player)var1, var3);
+      } catch (java.lang.reflect.InvocationTargetException var5) {
+         throw new RuntimeException(var5);
+      }
    }
 
    public final boolean check() {

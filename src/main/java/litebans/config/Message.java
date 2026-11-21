@@ -405,7 +405,6 @@ public enum Message implements CharSequence {
       return this.charSequence == null ? '?' : this.charSequence.charAt(var1);
    }
 
-   @Override
    public boolean isEmpty() {
       return this.length() == 0;
    }

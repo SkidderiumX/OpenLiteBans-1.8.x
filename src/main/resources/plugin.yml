@@ -2,9 +2,7 @@ name: LiteBans
 version: 2.19.0
 description: Lightweight banning plugin with full UUID support.
 main: litebans.BukkitPlugin
-api-version: "1.13"
 loadbefore: [Essentials]
-folia-supported: true
 # https://gitlab.com/ruany/LiteBans/-/wikis/Permissions
 permissions:
   litebans.ban:

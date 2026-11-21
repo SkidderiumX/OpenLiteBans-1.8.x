@@ -32,7 +32,6 @@ import litebans.platform.LiteBansPlatform;
 import litebans.platform.PlatformBridge;
 import litebans.platform.Sender;
 import litebans.platform.bukkit.BukkitBridge;
-import litebans.platform.bungee.BungeeBridge;
 import litebans.util.SortComparator2;
 import litebans.util.SortComparator4;
 import litebans.util.SortComparator8;
@@ -707,31 +706,6 @@ public final class PunishmentRequest {
             Sender var25 = var4.findOnlineByUuid(var6);
             if (var25 != null) {
                var8 = var25.hasPermission("litebans.exempt") || var25.hasPermission("litebans.exempt." + var7);
-            } else if (var1.getPlatform().getPlatformId() == 1) {
-               PlatformBridge var28 = var1.getPlatform().createBridge();
-               Intrinsics.handleObject(var28, "");
-               BungeeBridge var27 = (BungeeBridge)var28;
-               String[] var13 = var5.getConfig().getExemptExemptGroups();
-               int var15 = 0;
-               int var16 = var13.length;
-
-               while (true) {
-                  if (var15 >= var16) {
-                     var29 = false;
-                     break;
-                  }
-
-                  String var17 = var13[var15];
-                  if (var27.checkString(var2, var6, var17)) {
-                     var29 = true;
-                     break;
-                  }
-
-                  var15++;
-               }
-
-               var8 = var29;
-               var8 = var8 || var27.checkString2(var2, var6, "litebans.exempt") || var27.checkString2(var2, var6, "litebans.exempt." + var7);
             }
          }
 

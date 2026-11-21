@@ -4,7 +4,6 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.PacketType.Play.Client;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.utility.MinecraftVersion;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -97,14 +96,8 @@ public final class ChatPacketAdapter extends PacketAdapter {
    }
 
    private static final PacketType getPacketType2() {
-      PacketType var0;
-      try {
-         var0 = MinecraftVersion.WILD_UPDATE.atOrAbove() ? Client.CHAT_COMMAND : null;
-      } catch (Throwable var1) {
-         var0 = null;
-      }
-
-      return var0;
+      // 1.8.x has no separate signed chat-command packet; commands arrive through Client.CHAT.
+      return null;
    }
 
    public static final Lazy getLazy() {

@@ -12,14 +12,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT")
-    compileOnly("net.md-5:bungeecord-api:1.21-R0.4")
-    compileOnly("com.velocitypowered:velocity-api:3.3.0-SNAPSHOT")
-    compileOnly("net.kyori:adventure-api:4.17.0")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.17.0")
-    compileOnly("net.kyori:adventure-text-serializer-legacy:4.17.0")
+    // Spigot 1.8.9 runs on Java 8; the API artifact published for the 1.8.x line is 1.8.8-R0.1.
+    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
     compileOnly("net.luckperms:api:5.4")
-    compileOnly("com.comphenix.protocol:ProtocolLib:5.3.0")
+    // ProtocolLib 3.6.5 is the last line that supports the legacy 1.8 packet API used here.
+    compileOnly("com.comphenix.protocol:ProtocolLib:3.6.5")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
     compileOnly("org.slf4j:slf4j-api:2.0.17")
     compileOnly("org.jetbrains:annotations:24.1.0")
@@ -29,17 +26,24 @@ dependencies {
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    // Build with a modern JDK but emit Java 8 bytecode so the jar runs on 1.8.9's JVM.
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
-// Fabric/mixin sources need Yarn + Mojang mapped Minecraft; this build targets the Bukkit jar.
+// This build targets the Spigot/Bukkit jar only. Fabric/mixin and the BungeeCord/Velocity
+// proxy implementations need newer Java and Minecraft APIs, so they are not part of the 1.8.9 jar.
 sourceSets.main {
     java {
         exclude(
+            "litebans/BungeePlugin.java",
+            "litebans/VelocityPlugin.java",
             "litebans/FabricPlugin.java",
             "litebans/FabricMixinCheckIn.java",
             "litebans/mixin/**",
+            "litebans/platform/bungee/**",
+            "litebans/platform/velocity/**",
             "litebans/platform/fabric/**",
+            "litebans/chat/AdventureComponentParser.java",
             "litebans/platform/bukkit/AuthMeLoginListener.java",
             "litebans/command/CommandPermissionMapper.java",
             "litebans/command/MappedCommand.java",
@@ -58,6 +62,8 @@ tasks {
         }
     }
     withType<JavaCompile>().configureEach {
+        options.release.set(8)
+        options.encoding = "UTF-8"
         options.compilerArgs.addAll(listOf("-Xmaxerrs", "10000"))
     }
 }

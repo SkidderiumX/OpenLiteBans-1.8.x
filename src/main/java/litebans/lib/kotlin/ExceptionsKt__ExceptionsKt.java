@@ -1,6 +1,5 @@
 package litebans.lib.kotlin;
 
-import kotlin.internal.PlatformImplementationsKt;
 import litebans.lib.kotlin.jvm.internal.Intrinsics;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +8,7 @@ public class ExceptionsKt__ExceptionsKt {
       Intrinsics.handleObject3(throwable, "<this>");
       Intrinsics.handleObject3(exception, "exception");
       if (throwable != exception) {
-         PlatformImplementationsKt.IMPLEMENTATIONS.addSuppressed(throwable, exception);
+         throwable.addSuppressed(exception);
       }
    }
 }

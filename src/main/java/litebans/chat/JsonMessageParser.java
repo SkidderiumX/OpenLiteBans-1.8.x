@@ -22,8 +22,6 @@ import litebans.lib.kotlin.ranges.RangesKt;
 import litebans.lib.kotlin.text.StringsKt;
 import litebans.platform.LiteBansPlatform;
 import litebans.platform.Sender;
-import litebans.platform.bungee.BungeeSender;
-import litebans.platform.velocity.VelocitySender;
 import litebans.update.Version;
 import litebans.update.VersionParser;
 import litebans.util.FormatSplitter;
@@ -363,17 +361,7 @@ public final class JsonMessageParser extends PluginModule {
          boolean var8 = var5 == null;
          if (var8) {
             ChatComponentVersion var9 = ChatComponentVersion.V1_21_5;
-            int var10000;
-            if (this.platform.getPlatformId() == 1) {
-               Intrinsics.handleObject(var2, "");
-               var10000 = ((BungeeSender)var2).getInt();
-            } else if (this.platform.getPlatformId() == 2) {
-               Intrinsics.handleObject(var2, "");
-               var10000 = ((VelocitySender)var2).getInt();
-            } else {
-               var10000 = !this.checkSender(var2) ? 0 : 770;
-            }
-
+            int var10000 = !this.checkSender(var2) ? 0 : 770;
             int var10 = var10000;
             if (var10 < 770) {
                var9 = ChatComponentVersion.V1_16;
@@ -569,15 +557,7 @@ public final class JsonMessageParser extends PluginModule {
          return flag;
       } else {
          Version var2 = VersionParser.getVersionDefault(Version.versionParser, this.platform.createBridge().getServerVersion(), null, 2, null);
-         if (this.platform.getPlatformId() == 1) {
-            Intrinsics.handleObject(var1, "");
-            return ((BungeeSender)var1).getInt() >= 770;
-         } else if (this.platform.getPlatformId() == 2) {
-            Intrinsics.handleObject(var1, "");
-            return ((VelocitySender)var1).getInt() >= 770;
-         } else {
-            return var2.checkInt(1, 21, 5);
-         }
+         return var2.checkInt(1, 21, 5);
       }
    }
 }
