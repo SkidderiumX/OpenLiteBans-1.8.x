@@ -3,7 +3,7 @@
   <br>
   <font size="6"><b>OpenLiteBans</b></font>
   <br>
-  <font size="3">by Skid Solutions port to 1.8.x by SkidderiumX</font>
+  <font size="3">by Skid Solutions | port to 1.8.x by SkidderiumX</font>
 </p>
 
 ---
